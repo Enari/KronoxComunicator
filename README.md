@@ -1,5 +1,5 @@
 # KronoxComunicator
-A library for comunicating with website for booking group rooms at Mälardalen University (MDH).
+A library for communicating with the website for booking group rooms at Mälardalen University (MDH).
 
 
 ## Introduction
