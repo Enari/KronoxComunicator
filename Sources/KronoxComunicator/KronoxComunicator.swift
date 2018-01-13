@@ -11,11 +11,11 @@ import SwiftSoup
 import Just
 
 public struct Booking {
-    let bokningsId : String
-    let date : String
-    let time : String
-    let room : String
-    let booker : String
+    public let bokningsId : String
+    public let date : String
+    public let time : String
+    public let room : String
+    public let booker : String
 }
 
 public class KronoxComunicator {
