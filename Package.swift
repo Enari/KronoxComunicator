@@ -5,12 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "KronoxComunicator",
-    products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
-        .library(
-            name: "KronoxComunicator",
-            targets: ["KronoxComunicator"]),
-    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -23,8 +17,5 @@ let package = Package(
         .target(
             name: "KronoxComunicator",
             dependencies: ["SwiftSoup", "Just"]),
-        .testTarget(
-            name: "KronoxComunicatorTests",
-            dependencies: ["KronoxComunicator"]),
     ]
 )
