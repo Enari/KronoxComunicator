@@ -22,7 +22,7 @@ public class KronoxComunicator {
     public var sessionCookie : HTTPCookie?
     var timer = Timer()
     
-    init() {
+    public init() {
         // Starts the session
         startSession()
         
@@ -30,12 +30,12 @@ public class KronoxComunicator {
         timer = Timer.scheduledTimer(timeInterval: 1200, target: self, selector: #selector(self.sessionKeepAlive), userInfo: nil, repeats: true)
     }
     
-    func startSession(){
+    public func startSession(){
         sessionCookie = Just.post("https://webbschema.mdh.se/login_do.jsp").cookies["JSESSIONID"]!
     }
     
     @discardableResult
-    func login(username : String, password : String) -> (status: Bool, message: String) {
+    public func login(username : String, password : String) -> (status: Bool, message: String) {
         let parameters = ["username": username , "password": password]
         let request = Just.get("http://webbschema.mdh.se/ajax/ajax_login.jsp", params : parameters, cookies: ["JSESSIONID": sessionCookie!.value])
         
@@ -46,7 +46,7 @@ public class KronoxComunicator {
     }
     
     @discardableResult
-    func makeBooking(date : Date, room : String, interval : String, comment : String = "") -> (status: Bool, message: String) {
+    public func makeBooking(date : Date, room : String, interval : String, comment : String = "") -> (status: Bool, message: String) {
         
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yy-MM-dd"
@@ -60,7 +60,7 @@ public class KronoxComunicator {
         return (true, request.text!)
     }
     
-    func unBook(bokningsID : String) -> (status: Bool, message: String) {
+    public func unBook(bokningsID : String) -> (status: Bool, message: String) {
         let parameters = ["op": "avboka", "bokningsId": bokningsID]
         let request = Just.get("http://webbschema.mdh.se/ajax/ajax_resursbokning.jsp", params : parameters, cookies: ["JSESSIONID": sessionCookie!.value])
         
@@ -70,7 +70,7 @@ public class KronoxComunicator {
         return (true, request.text!)
     }
     
-    func getMyBookings() -> [Booking] {
+    public func getMyBookings() -> [Booking] {
         var bookings : [Booking] = []
         
         
@@ -107,7 +107,7 @@ public class KronoxComunicator {
         return bookings
     }
     
-    func getBookings(_ date : Date = Date()) -> [[String]] {
+    public func getBookings(_ date : Date = Date()) -> [[String]] {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy-MM-dd"
@@ -178,7 +178,7 @@ public class KronoxComunicator {
         }
     }
     
-    func getUserId() -> String {
+    public func getUserId() -> String {
         let parameters = ["op": "anvandarId"]
         let request = Just.get("http://webbschema.mdh.se/ajax/ajax_session.jsp", params : parameters, cookies: ["JSESSIONID": sessionCookie!.value])
         
@@ -189,7 +189,7 @@ public class KronoxComunicator {
         return(request.text!)
     }
     
-    func isLoggedIn() -> Bool {
+    public func isLoggedIn() -> Bool {
         let parameters = ["op": "anvandarId"]
         let request = Just.get("http://webbschema.mdh.se/ajax/ajax_session.jsp", params : parameters, cookies: ["JSESSIONID": sessionCookie!.value])
         
@@ -202,7 +202,7 @@ public class KronoxComunicator {
 }
 
 extension KronoxComunicator {
-    convenience init(JSESSIONID: String) {
+    convenience public init(JSESSIONID: String) {
         let cookieProps: [HTTPCookiePropertyKey : Any] = [
             HTTPCookiePropertyKey.domain: "webbschema.mdh.se",
             HTTPCookiePropertyKey.path: "/",
