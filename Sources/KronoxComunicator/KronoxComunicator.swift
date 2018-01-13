@@ -10,7 +10,7 @@ import Foundation
 import SwiftSoup
 import Just
 
-struct Booking {
+public struct Booking {
     let bokningsId : String
     let date : String
     let time : String
@@ -18,7 +18,7 @@ struct Booking {
     let booker : String
 }
 
-class KronoxComunicator {
+public class KronoxComunicator {
     public var sessionCookie : HTTPCookie?
     var timer = Timer()
     
